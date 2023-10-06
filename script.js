@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
    // Load an initial joke when the page loads
    window.onload = loadJoke;
+   console.log("Made by: https://github.com/NewNamesAreHard");
 });
 
 // Function to load a new random joke when the "Get New Joke" button is clicked
