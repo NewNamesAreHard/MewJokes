@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
    console.log("Made by: https://github.com/NewNamesAreHard");
 });
 
+let previousJoke = ""; // Initialize a variable to store the previous joke
+
 // Function to load and display a random dad joke from the text file
 function loadJoke() {
    // Use the fetch API to request the "jokes.txt" file
@@ -17,12 +19,18 @@ function loadJoke() {
             // If there are no valid jokes, display an error message
             console.warn("No valid jokes found in the file.");
          } else {
-            // Select a random joke from the filtered list
-            const randomIndex = Math.floor(Math.random() * jokes.length);
-            const randomJoke = jokes[randomIndex];
+            let randomJoke = "";
+            do {
+               // Select a random joke from the filtered list
+               const randomIndex = Math.floor(Math.random() * jokes.length);
+               randomJoke = jokes[randomIndex];
+            } while (randomJoke === previousJoke); // Repeat until a different joke is selected
 
             // Set the text content of the "joke-output" element to the random joke
             document.getElementById("joke-output").textContent = randomJoke;
+
+            // Update the previousJoke variable
+            previousJoke = randomJoke;
          }
       })
       .catch((error) => {
@@ -35,22 +43,16 @@ function loadJoke() {
 function CopyToClipboard() {
    // Get the text content of the "joke-output" element
    const jokeText = document.getElementById("joke-output").textContent;
-
    // Create a temporary <textarea> element
    const tempInput = document.createElement("textarea");
-
    // Set the value of the <textarea> to the joke text
    tempInput.value = jokeText;
-
    // Append the <textarea> element to the document's body
    document.body.appendChild(tempInput);
-
    // Select the text inside the <textarea>
    tempInput.select();
-
    // Execute the "copy" command to copy the selected text to the clipboard
    document.execCommand("copy");
-
    // Remove the temporary <textarea> element from the document
    document.body.removeChild(tempInput);
 
