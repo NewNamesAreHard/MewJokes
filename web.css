@@ -6,13 +6,27 @@
    --title-text: #fafafa; /* Title text color */
    --border-color: #808080; /* Border for form elements */
 }
+
 body {
    font-family: "Roboto", Arial, sans-serif;
    text-align: center;
+   background-color: var(--bg-color);
 }
-#joke-container {
+
+h1 {
+   background-color: var(--box-bg-color);
+}
+
+#maincontent {
+   background-color: var(--border-color);
    margin: 20px;
 }
+
+#joke-container {
+   background-color: var(--box-bg-color);
+   margin: 20px;
+}
+
 #joke-output {
    font-size: 18px;
    padding: 10px;
