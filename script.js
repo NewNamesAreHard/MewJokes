@@ -4,11 +4,6 @@ document.addEventListener("DOMContentLoaded", function () {
    console.log("Made by: https://github.com/NewNamesAreHard");
 });
 
-// Function to load a new random joke when the "Get New Joke" button is clicked
-function getNewJoke() {
-   loadJoke();
-}
-
 // Function to load and display a random dad joke from the text file
 function loadJoke() {
    // Use the fetch API to request the "jokes.txt" file
@@ -16,16 +11,19 @@ function loadJoke() {
       .then((response) => response.text()) // Convert the response to text
       .then((data) => {
          // Split the text data into an array of jokes using newline characters
-         const jokes = data.split("\n");
+         const jokes = data.split("\n").filter((joke) => joke.trim() !== ""); // Filter out empty jokes
 
-         // Generate a random index to select a random joke from the array
-         const randomIndex = Math.floor(Math.random() * jokes.length);
+         if (jokes.length === 0) {
+            // If there are no valid jokes, display an error message
+            console.warn("No valid jokes found in the file.");
+         } else {
+            // Select a random joke from the filtered list
+            const randomIndex = Math.floor(Math.random() * jokes.length);
+            const randomJoke = jokes[randomIndex];
 
-         // Get the random joke based on the random index
-         const randomJoke = jokes[randomIndex];
-
-         // Set the text content of the "joke-output" element to the random joke
-         document.getElementById("joke-output").textContent = randomJoke;
+            // Set the text content of the "joke-output" element to the random joke
+            document.getElementById("joke-output").textContent = randomJoke;
+         }
       })
       .catch((error) => {
          // Handle any errors that occur during the fetch operation
