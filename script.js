@@ -1,5 +1,15 @@
+document.addEventListener("DOMContentLoaded", function () {
+   // Load an initial joke when the page loads
+   window.onload = loadJoke;
+});
+
+// Function to load a new random joke when the "Get New Joke" button is clicked
+function getNewJoke() {
+   loadJoke();
+}
+
 // Function to load and display a random dad joke from the text file
-function loadRandomDadJoke() {
+function loadJoke() {
    // Use the fetch API to request the "jokes.txt" file
    fetch("jokes.txt")
       .then((response) => response.text()) // Convert the response to text
@@ -48,6 +58,3 @@ function CopyToClipboard() {
    // Log to console
    console.log(jokeText + " copied to clipboard: ");
 }
-
-// Load an initial joke when the page loads
-window.onload = loadRandomDadJoke;
